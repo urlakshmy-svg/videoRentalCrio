@@ -18,6 +18,9 @@ public class AuthService {
     AuthenticationManager authenticationManager;
 
     @Autowired
+    JwtService jwtService;
+
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Autowired 
@@ -38,9 +41,10 @@ public class AuthService {
         return AuthResponse.builder().build();
     }
 
-    public AuthResponse login(LoginRequestDTO request) {
+    public String login(LoginRequestDTO request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getEmail(),request.getPassword()));
-        return AuthResponse.builder().build();
+        String token = jwtService.generateToken(request.getEmail());
+        return token;
     }
     
 }
