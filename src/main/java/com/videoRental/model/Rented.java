@@ -1,5 +1,7 @@
 package com.videoRental.model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,8 +18,14 @@ public class Rented{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userid;    
-    private Long videoid;
-    private boolean isRented;
+    @ManyToOne
+    private User user;
+
+    @ManyToOne
+    private Video video;
+    
+     private boolean returned = false;
+    private LocalDateTime rentedAt;
+    private LocalDateTime returnedAt;
 }
 

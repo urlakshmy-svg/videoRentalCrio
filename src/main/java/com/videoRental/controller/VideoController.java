@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 
 @RestController
 public class VideoController {
@@ -36,6 +37,20 @@ public class VideoController {
     public ResponseEntity<String> deleteVideo(@PathVariable Long id) {
         videoService.deleteVideo(id);
         return ResponseEntity.ok("Video deleted successfully");
+    }
+
+    @PostMapping("/videos/{videoId}/rent")
+    public ResponseEntity<String> rentVideo(@PathVariable Long videoId, Authentication authentication) {
+        return ResponseEntity.ok(
+                videoService.rentVideo(videoId, authentication.getName())
+        );
+    }
+
+    @PostMapping("/videos/{videoId}/return")
+    public ResponseEntity<String> returnVideo(@PathVariable Long videoId,Authentication authentication) {
+        return ResponseEntity.ok(
+                videoService.returnVideo(videoId, authentication.getName())
+        );
     }
 
 }

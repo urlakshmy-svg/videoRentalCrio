@@ -1,9 +1,5 @@
 package com.videoRental.model;
 
-import java.util.Collection;
-
-import org.springframework.security.core.GrantedAuthority;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,6 +21,6 @@ public class Video{
     
     private String director;
     private String genre;
-    private boolean available;
+    private boolean available ;
 }
 
